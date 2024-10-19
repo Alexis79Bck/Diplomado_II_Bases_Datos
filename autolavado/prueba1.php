@@ -17,16 +17,19 @@ if ($conn->connect_error) {
   echo "<br />";
   print_r($conn);
   // Preparar la consulta SQL (sentencia preparada para prevenir inyección SQL)
-  $stmt = $conn->prepare("INSERT INTO servicios (nombre, descripcion, duracion, precio, descuento) 
-                        VALUES ('Lavado completo', 'Lavado exterior e interior del vehículo', 60, 30.00, 8)");
+  $sql = $conn->prepare("INSERT INTO servicios (nombre, descripcion, duracion, precio, descuento) 
+                        VALUES ('Pulido de Carroceria completo', 'Pulido de la corroceria', 60, 45.00, 10)");
 
   // Ejecutar la consulta
-  if ($stmt->execute()) {
-    echo "Nuevo servicio agregado con éxito.";
+  if ($sql->execute()) {
+    echo "<br /> Nuevo servicio agregado con éxito.";
   } else {
-    echo "Error al agregar el servicio: " . $stmt->error;
+    die ("<br /> Error al agregar el servicio: " . $sql->error);
   }
   
-  // Cerrar la sentencia
-  $stmt->close();
+
+  
 }
+
+$conn->close();
+
